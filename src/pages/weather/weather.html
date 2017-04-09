@@ -7,6 +7,16 @@
 <ion-content padding class="weather" >
   <ion-grid *ngIf="weather">
     <ion-row>
+      <ion-col width-100>
+        <ion-list>
+          <ion-item>
+            <ion-label>Search: </ion-label >
+            <ion-input type="text" [(ngModel)]="searchStr" (keyup)="searchQuery()"></ion-input>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+    <ion-row>
       <ion-col width-50 offset-25 class="location">
         <h2>{{weather.display_location.full}}</h2>
         <div class="icon"><img src="{{weather.icon_url}}"></div>

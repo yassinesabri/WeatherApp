@@ -14,6 +14,8 @@ export class WeatherPage implements OnInit{
   city:string;
   state:string;
   weather:any;
+  searchStr:string;
+  cities:any;
   constructor(public navCtrl: NavController,public weatherService:WeatherService) {
     this.city='BOSTON';
     this.state='MA';
@@ -24,5 +26,12 @@ export class WeatherPage implements OnInit{
       this.weather = data.current_observation;
     });
 
+  }
+  searchQuery(){
+    //console.log(this.searchStr);
+    this.weatherService.searchCities(this.searchStr).subscribe(data => {
+      //console.log(data);
+      this.cities = data.RESULTS;
+    });
   }
 }

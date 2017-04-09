@@ -9,12 +9,18 @@ import 'rxjs/add/operator/map';
 export class WeatherService {
   apiKey:string;
   conditionsUrl:string;
+  searchCityUrl:string;
   constructor(public http: Http) {
-    this.apiKey = '0019aa85e4c4536a';
-    this.conditionsUrl = 'http://api.wunderground.com/api/'+this.apiKey+'/conditions/q/';
     console.log('service Provider...');
+    this.apiKey = '0019aa85e4c4536a';
+    //see ionic.config.json for proxies config
+    this.conditionsUrl = 'http://localhost:8100/api/'+this.apiKey+'/conditions/q/';
+    this.searchCityUrl = 'http://localhost:8100/search/aq?query=';
   }
   getWeather(city:string,state:string){
     return this.http.get(this.conditionsUrl+state+'/'+city+'.json').map(res => res.json());
+  }
+  searchCities(query:string){
+    return this.http.get(this.searchCityUrl+query).map(res => res.json());
   }
 }

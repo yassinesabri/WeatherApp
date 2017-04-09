@@ -11,7 +11,7 @@ export class WeatherService {
   conditionsUrl:string;
   searchCityUrl:string;
   constructor(public http: Http) {
-    console.log('service Provider...');
+    //console.log('service Provider...');
     this.apiKey = '0019aa85e4c4536a';
     //see ionic.config.json for proxies config
     this.conditionsUrl = 'http://localhost:8100/api/'+this.apiKey+'/conditions/q/';

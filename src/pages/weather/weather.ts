@@ -4,6 +4,7 @@
 import { Component,OnInit } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import {WeatherService} from '../../services/weather.service';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'page-weather',
@@ -15,11 +16,12 @@ export class WeatherPage implements OnInit{
   weather:any;
   searchStr:string;
   cities:any;
-  constructor(public navCtrl: NavController,public weatherService:WeatherService) {
+  constructor(public navCtrl: NavController,public weatherService:WeatherService,public storage: Storage) {
 
   }
   ngOnInit(){
     this.getDefaultCity();
+    console.log('zmw : '+this.cityZmw);
     this.weatherService.getWeather(this.cityZmw).subscribe(data => {
       //console.log(data);
       this.weather = data.current_observation;
@@ -42,7 +44,17 @@ export class WeatherPage implements OnInit{
       });
   }
   getDefaultCity(){
-    //Boston city
-    this.cityZmw='94125.1.99999';
+     this.cityZmw='10001.11.99999';
+    /*this.storage.ready().then(() => {
+      this.storage.get('defaultCity').then((val) => {
+        console.log(val);
+        if(val != undefined){
+          this.cityZmw = JSON.parse(val).zmw;
+        }
+        else{
+          this.cityZmw = '10001.11.99999';
+        }
+      });
+    });*/
   }
 }

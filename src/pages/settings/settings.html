@@ -5,6 +5,24 @@
 </ion-header>
 
 <ion-content padding class="settings">
-  <h2>Settings</h2>
+  <ion-grid>
+    <ion-row>
+      <ion-col width-100>
+        <ion-list>
+          <ion-item>
+            <ion-label>Default City : </ion-label >
+            <ion-input type="text" [(ngModel)]="searchStr" (keyup)="searchQuery()" #search></ion-input>
+          </ion-item>
+        </ion-list>
+        <ion-list *ngIf="cities">
+          <button ion-item *ngFor="let city of cities" (click)="setDefaultCity(city);search.value='';">
+            {{ city.name }}
+          </button>
+        </ion-list>
+        <p class="current">Current : {{defaultCity}}</p>
+        <button ion-button color="light" block (click)="saveChanges()">Save Changes</button>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
 
 </ion-content>

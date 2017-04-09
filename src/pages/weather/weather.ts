@@ -16,9 +16,11 @@ export class WeatherPage implements OnInit{
   weather:any;
   searchStr:string;
   cities:any;
+  isSelected:boolean;
   constructor(public navCtrl: NavController,public weatherService:WeatherService) {
     this.city='BOSTON';
     this.state='MA';
+    this.isSelected=false;
   }
   ngOnInit(){
     this.weatherService.getWeather(this.city,this.state).subscribe(data => {
@@ -28,10 +30,15 @@ export class WeatherPage implements OnInit{
 
   }
   searchQuery(){
+    this.isSelected = true;
     //console.log(this.searchStr);
     this.weatherService.searchCities(this.searchStr).subscribe(data => {
       //console.log(data);
       this.cities = data.RESULTS;
     });
+  }
+  citieSelected(city){
+      console.log(city.name);
+      this.isSelected = false;
   }
 }

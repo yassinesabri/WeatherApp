@@ -11,8 +11,13 @@
         <ion-list>
           <ion-item>
             <ion-label>Search: </ion-label >
-            <ion-input type="text" [(ngModel)]="searchStr" (keyup)="searchQuery()"></ion-input>
+            <ion-input type="text" [(ngModel)]="searchStr" (keyup)="searchQuery()" #search></ion-input>
           </ion-item>
+        </ion-list>
+        <ion-list *ngIf="isSelected">
+          <button ion-item *ngFor="let city of cities" (click)="citieSelected(city);search.value='';">
+            {{ city.name }}
+          </button>
         </ion-list>
       </ion-col>
     </ion-row>

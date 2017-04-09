@@ -11,26 +11,22 @@ import {WeatherService} from '../../services/weather.service';
   providers : [WeatherService],
 })
 export class WeatherPage implements OnInit{
-  city:string;
-  state:string;
+  cityZmw:string;
   weather:any;
   searchStr:string;
   cities:any;
-  isSelected:boolean;
   constructor(public navCtrl: NavController,public weatherService:WeatherService) {
-    this.city='BOSTON';
-    this.state='MA';
-    this.isSelected=false;
+
   }
   ngOnInit(){
-    this.weatherService.getWeather(this.city,this.state).subscribe(data => {
+    this.getDefaultCity();
+    this.weatherService.getWeather(this.cityZmw).subscribe(data => {
       //console.log(data);
       this.weather = data.current_observation;
     });
 
   }
   searchQuery(){
-    this.isSelected = true;
     //console.log(this.searchStr);
     this.weatherService.searchCities(this.searchStr).subscribe(data => {
       //console.log(data);
@@ -38,7 +34,15 @@ export class WeatherPage implements OnInit{
     });
   }
   citieSelected(city){
-      console.log(city.name);
-      this.isSelected = false;
+      this.cities = [];
+      //console.log(city.name);
+      this.weatherService.getWeather(city.zmw).subscribe(data => {
+        //console.log(data);
+        this.weather = data.current_observation;
+      });
+  }
+  getDefaultCity(){
+    //Boston city
+    this.cityZmw='94125.1.99999';
   }
 }

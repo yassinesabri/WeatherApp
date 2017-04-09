@@ -14,7 +14,7 @@
             <ion-input type="text" [(ngModel)]="searchStr" (keyup)="searchQuery()" #search></ion-input>
           </ion-item>
         </ion-list>
-        <ion-list *ngIf="isSelected">
+        <ion-list *ngIf="cities">
           <button ion-item *ngFor="let city of cities" (click)="citieSelected(city);search.value='';">
             {{ city.name }}
           </button>

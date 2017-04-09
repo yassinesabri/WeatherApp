@@ -17,10 +17,11 @@ export class WeatherService {
     this.conditionsUrl = 'http://localhost:8100/api/'+this.apiKey+'/conditions/q/';
     this.searchCityUrl = 'http://localhost:8100/search/aq?query=';
   }
-  getWeather(city:string,state:string){
-    return this.http.get(this.conditionsUrl+state+'/'+city+'.json').map(res => res.json());
+  getWeather(cityZmw:string){
+    return this.http.get(this.conditionsUrl+'/zmw:'+cityZmw+'.json').map(res => res.json());
   }
   searchCities(query:string){
     return this.http.get(this.searchCityUrl+query).map(res => res.json());
   }
+
 }
